@@ -1,0 +1,45 @@
+﻿@page "/products"
+@using AXIS.App.Application.Services
+@using AXIS.App.Core.Entities;
+@inject ProductService productService
+@inject IConfiguration Configuration
+@using Syncfusion.Blazor.Grids
+
+<h3>Products</h3>
+
+<SfGrid DataSource="@products" AllowPaging="true" AllowSorting="true" AllowFiltering="true" AllowExcelExport="true" Height="400" Width="900">
+    <GridEditSettings AllowAdding="false" AllowEditing="false" AllowDeleting="false" Mode="Syncfusion.Blazor.Grids.EditMode.Normal"></GridEditSettings>
+    <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.FilterBar"></GridFilterSettings>
+    <GridPageSettings PageSizes="true"></GridPageSettings>
+    <GridColumns>
+        <GridColumn Field="Id" HeaderText="ID" Width="100"></GridColumn>
+        <GridColumn Field="Nombre" HeaderText="Nombre" Width="200"></GridColumn>
+        <GridColumn Field="Sku" HeaderText="SKU" Width="150"></GridColumn>
+        <GridColumn Field="Stock" HeaderText="Stock" Width="120"></GridColumn>
+    </GridColumns>
+</SfGrid>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <p style="color:red">@errorMessage</p>
+}
+
+@code {
+    private List<AXIS.App.Core.Entities.Product> products = new();
+    private string errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        errorMessage = string.Empty;
+        try
+        {
+            // Leer el token desde appsettings.json
+            var token = Configuration["Local:Token"] ?? string.Empty;
+            products = await productService.GetProductsAsync(token);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error al cargar productos: {ex.Message}";
+        }
+    }
+}
