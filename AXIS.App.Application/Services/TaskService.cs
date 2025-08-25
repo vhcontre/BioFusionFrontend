@@ -3,7 +3,7 @@ using AXIS.App.Core.Entities;
 using AXIS.App.Core.Repositories;
 using AXIS.App.Shared;
 using Microsoft.EntityFrameworkCore;
-using CoreTaskStatus = AXIS.App.Core.Entities.TaskStatus;
+using CoreTaskStatus = AXIS.App.Core.Enums.TaskStatus;
 
 namespace AXIS.App.Application.Services
 {

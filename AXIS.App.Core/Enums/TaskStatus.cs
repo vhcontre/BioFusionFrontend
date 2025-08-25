@@ -1,4 +1,4 @@
-namespace AXIS.App.Core.Entities
+namespace AXIS.App.Core.Enums
 {
     public enum TaskStatus
     {

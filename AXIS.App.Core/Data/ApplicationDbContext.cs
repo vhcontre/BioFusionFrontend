@@ -13,7 +13,12 @@ namespace AXIS.App.Core.Data
         }
 
         public DbSet<TaskPlan> TaskPlans { get; set; } = null!;
-        
+        public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<Process> Processes { get; set; } = null!;
+        public DbSet<ProcessParameter> ProcessParameters { get; set; } = null!;
+        public DbSet<TaskLog> TaskLogs { get; set; } = null!;
+        public DbSet<Variable> Variables { get; set; } = null!;
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
